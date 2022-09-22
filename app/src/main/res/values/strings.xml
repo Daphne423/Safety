@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Safety</string>
+    <string name="Register">Registration</string>
+    <string name="Name">Enter Name</string>
+    <string name="Email">Enter Email Address</string>
+    <string name="Pass">Enter Password</string>
+    <string name="Con_pass">Confirm Password</string>
+    <string name="Reg">Register</string>
+    <string name="sign_in">Already have an account? Sign In</string>
+    <string name="LogIn">Login</string>
+    <string name="new_account">Not registered? Create new Account</string>
+    <string name="Log">LOGIN</string>
+    <string name="forgot_pass">Forgot Password?</string>
+    <string name="Phone">Enter Phone Number</string>
+    <string name="face">Facebook icon as an alternative means of logging in</string>
+    <string name="google">Google icon as an alternative means for logging in</string>
+    <string name="registered_successfully">Registered Successfully</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="heading">About</string>
+    <string name="subheading">Women Safety</string>
+    <string name="text">Why this app?
+        \nThis application is created to help reduce the gender based violence cases in Kenya against Women.
+    \nThis is an important step towards achieving the 5 th Sustainable Development Goal set by the United Nations on Gender Equality.
+        \nGender Equality is all about equal rights and fair treatment.
+        \nThis page basically explains how this app tries to solve that
+        \nEmergency contact section: it enables you to access your phone contacts and select a minimum of 2 and a maximum of 5 contacts
+        \n who will be notified in case of an emergency.You can change the contacts at any time
+        \nLocation section: it enables you to access locations of the nearest hospital and police station for help.
+        \n I hope you will not be in a position to use them but this is for use when the situation gets out of hand.
+        \nTips contact section: it enables you to access important resources such as articles on what to do and how to respond when such a situation occurs.
+        \nAbout contact section: it explains more about the application including the features it contains
+        \nEmergency button section: This is the button icon at the bottom of the dashboard.
+        \n Upon pressing you should receive a prompt on whether to cancel or continue.If you press continue,it will send a call for help message with your current location to your emergency contacts
+    </string>
+
+
+</resources>
+
+
+<!--<string name="multiple_line">This is line one "\n" This is line two "\n"This is line three "\n" This is line four </string>-->
+<!--<string name="article_text"> The father tells the older son:-->
+<!--    \nThe story of the prodigal son is one of the most insightful, memorable stories that Jesus told while He was on Earth.-->
+<!--    \n-->
+<!--    <b>1</b>-->
+<!--    \nThrough it, Christ brought to light the ravages of sin, the value of true repentance, and the love of the heavenly Father.-->
+<!--    \n-->
+<!--    \nBy putting that story into rhyming verse on a child’s level, A Son Who Ran Away offers an easy-to-understand resource for teaching children the meaning and importance of the prodigal son.-->
+<!--    \n-->
+<!--    <b>2</b>-->
+<!--    \nIn the story, a father has two sons. The younger son asks for his portion of inheritance from his father, who grants his son\'s request.-->
+<!--    \n-->
+<!--    \nThis son however is prodigal that is wasteful and extravagant thus squandering his fortune and eventually becoming destitute.-->
+<!--    \nAs consequence, he now must return home empty-handed and intend to beg his father to accept him back as a servant. To the son's surprise, he is not scorned by his father but is welcomed back with celebration and a welcoming party.-->
+<!--    \nEnvious, the older son refuses to participate in the festivities.\n-->

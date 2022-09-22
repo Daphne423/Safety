@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "277754244187",
+    "project_id": "safety-c08c6",
+    "storage_bucket": "safety-c08c6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277754244187:android:b96ddc8b980c837efd237e",
+        "android_client_info": {
+          "package_name": "com.daphne.safety"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277754244187-lmpeup9k9oup1n8vjpjm0le0trm5pkep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtcyS6a38sM5EEn1jSA_ch_j4TUoA5-V8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277754244187-lmpeup9k9oup1n8vjpjm0le0trm5pkep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
