@@ -13,4 +13,7 @@
     <color name="deep_pink">#FF1493</color>
     <color name="light_gray">#ededed</color>
     <color name="dark_gray">#6e6e6e</color>
+    <color name="light_blue">#b3cde0</color>
+    <color name="blue"> #6497b1</color>
+
 </resources>

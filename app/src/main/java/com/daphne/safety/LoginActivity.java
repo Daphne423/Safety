@@ -182,6 +182,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void Forgot(View view) {
+        Intent intent = new Intent(LoginActivity.this, ForgetPassword.class);
+        startActivity(intent);
 
 
     }

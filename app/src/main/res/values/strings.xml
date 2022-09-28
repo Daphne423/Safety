@@ -17,22 +17,21 @@
     <string name="registered_successfully">Registered Successfully</string>
     <string name="dashboard">Dashboard</string>
     <string name="heading">About</string>
-    <string name="subheading">Women Safety</string>
-    <string name="text">Why this app?
-        \nThis application is created to help reduce the gender based violence cases in Kenya against Women.
-    \nThis is an important step towards achieving the 5 th Sustainable Development Goal set by the United Nations on Gender Equality.
+    <string name="subheading">SafeScape</string>
+    <string name="text">This application is created to help reduce the gender based violence cases in Kenya against Women.
+    \nThis is an important step towards achieving the <b>5 th</b> Sustainable Development Goal set by the United Nations on Gender Equality.
         \nGender Equality is all about equal rights and fair treatment.
         \nThis page basically explains how this app tries to solve that
-        \nEmergency contact section: it enables you to access your phone contacts and select a minimum of 2 and a maximum of 5 contacts
+        \n<b>Emergency contact section:</b> it enables you to access your phone contacts and select a minimum of 2 and a maximum of 5 contacts
         \n who will be notified in case of an emergency.You can change the contacts at any time
-        \nLocation section: it enables you to access locations of the nearest hospital and police station for help.
+        \n<b>Location section:</b> it enables you to access locations of the nearest hospital and police station for help.
         \n I hope you will not be in a position to use them but this is for use when the situation gets out of hand.
-        \nTips contact section: it enables you to access important resources such as articles on what to do and how to respond when such a situation occurs.
+        \n<b>Tips contact section:</b> it enables you to access important resources such as articles on what to do and how to respond when such a situation occurs.
         \nAbout contact section: it explains more about the application including the features it contains
-        \nEmergency button section: This is the button icon at the bottom of the dashboard.
+        \n<b>Emergency button section:</b> This is the button icon at the bottom of the dashboard.
         \n Upon pressing you should receive a prompt on whether to cancel or continue.If you press continue,it will send a call for help message with your current location to your emergency contacts
     </string>
-
+    <string name="find">Find</string>
 
 </resources>
 

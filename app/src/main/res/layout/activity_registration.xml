@@ -4,19 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/deep_pink"
+    android:background="@color/light_blue"
     tools:context=".RegistrationActivity">
 
     <TextView
+        android:id="@+id/user_reg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Register"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:textSize="40sp"
+        android:text="@string/Register"
         android:textColor="@color/black"
-        android:textStyle="normal"
-        android:id="@+id/user_reg" />
+        android:textSize="40sp"
+        android:textStyle="normal" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 android:textColor="@color/black"
                 android:background="@drawable/border"
                 android:textSize="22sp"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/black"
 
                 />
 
@@ -62,7 +62,7 @@
                 android:textColor="@color/black"
                 android:background="@drawable/border"
                 android:textSize="22sp"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/black"
 
                 />
 
@@ -87,7 +87,7 @@
                 android:textColor="@color/black"
                 android:background="@drawable/border"
                 android:textSize="22sp"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/black"
                 app:passwordToggleEnabled="true"
 
                 />
@@ -112,7 +112,7 @@
                 android:textColor="@color/black"
                 android:background="@drawable/border"
                 android:textSize="22sp"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/black"
                 app:passwordToggleEnabled="true"
 
                 />
@@ -136,7 +136,7 @@
                 android:maxLength="10"
                 android:inputType="number"
                 android:textColor="@color/black"
-                android:textColorHint="@color/white"
+                android:textColorHint="@color/black"
                 android:textSize="22sp"
 
                 />
@@ -156,7 +156,9 @@
                 android:textStyle="bold"
                 android:id="@+id/reg_btn"
                 android:onClick="Register"
-                android:backgroundTint="@color/black"
+                android:background="@drawable/border"
+                android:textColor="@color/black"
+                android:textSize="20sp"
                 android:text="Register"
                 tools:ignore="UsingOnClickInXml"/>
 

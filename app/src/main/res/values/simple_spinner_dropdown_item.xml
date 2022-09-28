@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hospital">Hospitals</string>
+    <string name="police">Police Stations</string>
+
+     <string-array name="dropdown">
+     <item>@string/hospital</item>
+     <item>@string/police</item>
+</string-array>
+</resources>
