@@ -32,6 +32,8 @@
         \n Upon pressing you should receive a prompt on whether to cancel or continue.If you press continue,it will send a call for help message with your current location to your emergency contacts
     </string>
     <string name="find">Find</string>
+    <string name="search">Search</string>
+    <string name="done">DONE</string>
 
 </resources>
 

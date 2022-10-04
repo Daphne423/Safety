@@ -71,10 +71,10 @@ public class LocationActivity extends AppCompatActivity {
         //Initialize array of place type
         String[] placeTypeList = {"hospital","police station"};
         //Initialize array of place name
-        String[] placeNameList = {"Hospital,Police Station"};
+        //String[] placeNameList = {"Hospital,Police Station"};
 
         //Set Adapter on spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.dropdown, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.dropdown, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(adapter);
 //        spin.setAdapter(new ArrayAdapter<> (LocationActivity.this, R.array.dropdown, android.R.layout.simple_spinner_dropdown_item));
