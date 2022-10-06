@@ -8,15 +8,18 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class ContactsLoader extends AsyncTask<String,Void,Void>{
     ContactsListAdapter contactsListAdapter;
     Context context;
-    private ArrayList<ContactsList> tempContactHolder;
+    private ArrayList<Contact> tempContactHolder;
     TextView txtProgress;
     int totalContactsCount,loadedContactsCount;
 
@@ -31,11 +34,26 @@ public class ContactsLoader extends AsyncTask<String,Void,Void>{
     }
 
     @SuppressLint("Range")
+//    @Override
+    protected Void doInBackground() {
+        return doInBackground();
+    }
+
+    @SuppressLint("Range")
+
     @Override
     protected Void doInBackground(String[] filters) {
 
 
         String filter = filters[0];
+        Log.d("Sync,",filter);
+        URL url;
+        try {
+            url = new URL(filter);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
 
         ContentResolver contentResolver = context.getContentResolver();
 
@@ -96,7 +114,7 @@ public class ContactsLoader extends AsyncTask<String,Void,Void>{
                             );
 
                             String phNo = phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                            tempContactHolder.add(new ContactsList(phId, name, phNo, label));
+                            tempContactHolder.add(new Contact(phId, name, phNo, label));
 
 
 

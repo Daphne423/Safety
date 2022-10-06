@@ -3,33 +3,33 @@ package com.daphne.safety;
 import java.util.ArrayList;
 
 public class ContactsList {
-    public ArrayList<ContactActivity> contactArrayList;
+    public ArrayList<Contact> contactArrayList;
 
     ContactsList() {
 
-        contactArrayList = new ArrayList<ContactActivity>();
+        contactArrayList = new ArrayList<Contact>();
     }
 
-    public ContactsList(String phId, String name, String phNo, String label) {
-    }
+//    public ContactsList(String phId, String name, String phNo, String label) {
+//    }
 
     public int getCount() {
 
         return contactArrayList.size();
     }
 
-    public void addContact(ContactActivity contact) {
+    public void addContact(Contact contact) {
         contactArrayList.add(contact);
     }
 
-    public void removeContact(ContactActivity contact) {
+    public void removeContact(Contact contact) {
         contactArrayList.remove(contact);
     }
 
-    public ContactActivity getContact(int id) {
+    public Contact getContact(int id) {
 
         for (int i = 0; i < this.getCount(); i++) {
-            if (Integer.parseInt(contactArrayList.get(i).id) == id)
+            if (Integer.parseInt(contactArrayList.get(i).id)==id)
                 return contactArrayList.get(i);
         }
 

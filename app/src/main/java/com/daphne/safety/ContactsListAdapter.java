@@ -2,6 +2,8 @@ package com.daphne.safety;
 
 import android.app.Activity;
 import android.content.Context;
+import android.database.DataSetObservable;
+import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +33,7 @@ public class ContactsListAdapter  extends BaseAdapter{
 
         filteredContactsList.contactArrayList.clear();
 
-        if (filterContactName.isEmpty() || filterContactName.length() < 1) {
+        if (filterContactName.isEmpty() || filterContactName.length()<1) {
             filteredContactsList.contactArrayList.addAll(contactsList.contactArrayList);
             this.filterContactName = "";
 
@@ -45,7 +47,7 @@ public class ContactsListAdapter  extends BaseAdapter{
         }
         notifyDataSetChanged();
     }
-    public void addContacts(ArrayList<ContactsList> contacts){
+    public void addContacts(ArrayList<Contact> contacts){
         this.contactsList.contactArrayList.addAll(contacts);
         this.filter(this.filterContactName);
 
@@ -57,7 +59,7 @@ public class ContactsListAdapter  extends BaseAdapter{
     }
 
     @Override
-    public ContactActivity getItem(int position) {
+    public Contact getItem(int position) {
         return filteredContactsList.contactArrayList.get(position);
     }
 
@@ -90,7 +92,7 @@ public class ContactsListAdapter  extends BaseAdapter{
         viewHolder.chkContact.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ContactActivity contact = filteredContactsList.getContact(buttonView.getId());
+                Contact contact = filteredContactsList.getContact(buttonView.getId());
 
                 if(contact!=null && isChecked && !alreadySelected(contact)){
                     selectedContactsList.addContact(contact);
@@ -104,7 +106,7 @@ public class ContactsListAdapter  extends BaseAdapter{
         return convertView;
     }
 
-    public boolean alreadySelected(ContactActivity contact)
+    public boolean alreadySelected(Contact contact)
     {
         if(this.selectedContactsList.getContact(Integer.parseInt(contact.id))!=null)
             return true;

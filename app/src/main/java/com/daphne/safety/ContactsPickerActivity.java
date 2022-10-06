@@ -1,9 +1,10 @@
 package com.daphne.safety;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -11,15 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.provider.ContactsContract;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.text.BreakIterator;
-import java.util.ArrayList;
 
 public class ContactsPickerActivity extends AppCompatActivity {
-    private static final int CONTACT_PICK_REQUEST = 1;
+
     ListView contactsChooser;
     Button btnDone;
     EditText txtFilter;
@@ -30,7 +25,7 @@ public class ContactsPickerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact);
+        setContentView(R.layout.activity_contacts_picker);
 
         contactsChooser = (ListView) findViewById(R.id.lst_contacts_chooser);
         btnDone = (Button) findViewById(R.id.btn_done);
@@ -38,12 +33,13 @@ public class ContactsPickerActivity extends AppCompatActivity {
         txtLoadInfo = (TextView) findViewById(R.id.txt_load_progress);
 
 
-        contactsListAdapter = new ContactsListAdapter(this, new ContactsList());
+        contactsListAdapter = new ContactsListAdapter(this,new ContactsList());
 
         contactsChooser.setAdapter(contactsListAdapter);
 
 
         loadContacts("");
+
 
 
         txtFilter.addTextChangedListener(new TextWatcher() {
@@ -69,14 +65,15 @@ public class ContactsPickerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (contactsListAdapter.selectedContactsList.contactArrayList.isEmpty()) {
+                if(contactsListAdapter.selectedContactsList.contactArrayList.isEmpty()){
                     setResult(RESULT_CANCELED);
-                } else {
+                }
+                else{
 
                     Intent resultIntent = new Intent();
 
                     resultIntent.putParcelableArrayListExtra("SelectedContacts", contactsListAdapter.selectedContactsList.contactArrayList);
-                    setResult(RESULT_OK, resultIntent);
+                    setResult(RESULT_OK,resultIntent);
 
                 }
                 finish();
@@ -86,47 +83,29 @@ public class ContactsPickerActivity extends AppCompatActivity {
     }
 
 
-    private void loadContacts(String filter) {
 
-        if (contactsLoader != null && contactsLoader.getStatus() != AsyncTask.Status.FINISHED) {
-            try {
+    private void loadContacts(String filter){
+
+        if(contactsLoader!=null && contactsLoader.getStatus()!= AsyncTask.Status.FINISHED){
+            try{
                 contactsLoader.cancel(true);
-            } catch (Exception e) {
+            }catch (Exception e){
 
             }
         }
-        if (filter == null) filter = "";
+        if(filter==null) filter="";
 
-        try {
+        try{
             //Running AsyncLoader with adapter and  filter
-            contactsLoader = new ContactsLoader(this, contactsListAdapter);
+            contactsLoader = new ContactsLoader(this,contactsListAdapter);
             contactsLoader.txtProgress = txtLoadInfo;
             contactsLoader.execute(filter);
-        } catch (Exception e) {
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CONTACT_PICK_REQUEST && resultCode == RESULT_OK) {
-
-            ArrayList<Parcelable> selectedContacts = data.getParcelableArrayListExtra("SelectedContacts");
-
-            String display = "";
-            for (int i = 0; i < selectedContacts.size(); i++) {
-
-                display += (i + 1) + ". " + selectedContacts.get(i).toString() + "\n";
-
-            }
 
 
 
-            contacts.setText("Selected Contacts : \n\n" + display);
-
-        }
-
-    }
 }

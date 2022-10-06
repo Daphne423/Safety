@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent i;
 
         switch (v.getId()){
-            case R.id.Contact:i=new Intent(this,ContactActivity.class);startActivity(i);
+            case R.id.Contact:i=new Intent(this,MainScreen.class);startActivity(i);
             break;
             case R.id.location:i = new Intent(this,LocationActivity.class);startActivity(i);
             break;

@@ -289,7 +289,7 @@ public class LocationActivity extends AppCompatActivity {
 //            loc.put("Lat", lat);
 //
 //            String UserID = fAuth.getCurrentUser().getUid();
-//            fstore.collection("Profile Data").document(UserID).update(loc);
+//            store.collection("Profile Data").document(UserID).update(loc);
 //
 //            Toast.makeText(BakerMapActivity.this, "Your location has been saved successfully", Toast.LENGTH_SHORT).show();
 //            Intent intent = new Intent(BakerMapActivity.this, BakerProfile.class);
