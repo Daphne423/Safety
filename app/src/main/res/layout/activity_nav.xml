@@ -22,7 +22,7 @@
             android:layout_marginTop="128dp"
             android:gravity="center"
             android:text="SafeScape"
-            android:textSize="18sp" />
+            android:textSize="21sp" />
     </LinearLayout>
 
     <!-- this the navigation view which draws and shows the navigation drawer -->
