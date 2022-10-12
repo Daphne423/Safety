@@ -97,7 +97,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/border"
+                android:backgroundTint="@color/white"
                 android:layout_margin="30dp"
                 android:textColor="@color/black"
                 android:text="@string/Log"
