@@ -227,12 +227,5 @@
         android:scaleType="fitCenter"
         android:src="@drawable/emergebutton" />
 
-
-
-
-
-
-
-
-
 </RelativeLayout>
+

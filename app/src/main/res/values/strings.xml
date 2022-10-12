@@ -20,6 +20,10 @@
     <string name="action_settings">Settings</string>
     <string name="txt_done">Done</string>
     <string name="txt_search">Search</string>
+    <!-- to toggle the open close button of the navigation drawer -->
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+
     <string name="subheading">SafeScape</string>
     <string name="text">This application is created to help reduce the gender based violence cases in Kenya against Women.
     \nThis is an important step towards achieving the <b>5 th</b> Sustainable Development Goal set by the United Nations on Gender Equality.

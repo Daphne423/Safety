@@ -6,6 +6,7 @@
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/drawable/border.xml" value="0.2075" />
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/drawable/circle.xml" value="0.155" />
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/drawable/img.xml" value="0.155" />
+        <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/drawable/navigation_bar.xml" value="0.1" />
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/drawable/shape_btn.xml" value="0.2075" />
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/layout/activity_about.xml" value="0.25" />
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/layout/activity_button.xml" value="0.19895833333333332" />
@@ -17,12 +18,14 @@
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/layout/activity_main_screen.xml" value="0.2" />
+        <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/layout/activity_nav.xml" value="0.11851851851851852" />
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/layout/activity_registration.xml" value="0.25" />
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/layout/activity_splash_screen.xml" value="0.22" />
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/layout/activity_tips.xml" value="0.24" />
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/layout/contact.xml" value="0.2612244897959184" />
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/layout/contact_item.xml" value="0.2375" />
         <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/menu/menu_main.xml" value="0.1638888888888889" />
+        <entry key="..\:/Users/daphn/AndroidStudioProjects/Safety/app/src/main/res/menu/nav_menu.xml" value="0.22395833333333334" />
       </map>
     </option>
   </component>
