@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait");
         progressDialog.setCanceledOnTouchOutside(false);
+        //sendlinkstodb();
 
     }
 
@@ -192,6 +193,9 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this,RegistrationActivity.class);
         startActivity(intent);
     }
+
+    // test
+
 }
 
 

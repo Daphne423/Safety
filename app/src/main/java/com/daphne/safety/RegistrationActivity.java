@@ -14,8 +14,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
@@ -55,7 +57,11 @@ public class RegistrationActivity extends AppCompatActivity {
         progressDialog.setTitle("Please wait");
         progressDialog.setCanceledOnTouchOutside(false);
 
+       // sendlinkstodb();
+
     }
+
+
 
     //progress
     public void onClick(View view) {
@@ -174,6 +180,15 @@ public class RegistrationActivity extends AppCompatActivity {
         data.put("password",""+str_pass);
         data.put("phone",""+str_phone);
         data.put("time",""+regtime);
+        data.put("Mylink", "linksss");
+        data.put("Mylinka", "linksssa");
+//        data.put("Mylinkb", "linksssb");
+//        data.put("Mylinkc", "linksssc");
+//        data.put("Mylinkd", "linksssd");
+//        data.put("Mylinke", "linkssse");
+//        data.put("Mylinkf", "linksssf");
+//        data.put("Mylinkg", "linksssg");
+
 
 
         //database

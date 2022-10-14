@@ -1,15 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="300dp"
-        android:layout_height="45dp"
-        android:gravity="center_horizontal"
-        android:text="my link"
-        android:textColor="@color/black"
-        android:layout_marginTop="20dp"
-        android:textSize="21sp"
-        android:id="@+id/mytextlink"/>
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/user_reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logo"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/Tips"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="normal" />
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Types of violence against women and girls "
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:textSize="15sp"
+            android:id="@+id/header1"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="my link"
+            android:textColor="@color/navyblue"
+            android:layout_marginTop="10dp"
+            android:textSize="21sp"
+            android:id="@+id/mylink1"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="General Statistics of Violence  "
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:textSize="15sp"
+            android:id="@+id/heading2"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="my link"
+            android:textColor="@color/navyblue"
+            android:layout_marginTop="10dp"
+            android:textSize="21sp"
+            android:id="@+id/mylink2"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Ways to reduce chances of becoming a victim "
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:textSize="15sp"
+            android:id="@+id/heading3"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="my link"
+            android:textColor="@color/navyblue"
+            android:layout_marginTop="10dp"
+            android:textSize="21sp"
+            android:id="@+id/mylink3"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="What to do in a violent situation"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:textSize="15sp"
+            android:id="@+id/heading4"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="my link"
+            android:textColor="@color/navyblue"
+            android:layout_marginTop="10dp"
+            android:textSize="21sp"
+            android:id="@+id/mylink4"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="What to do after someone violates you "
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:textSize="15sp"
+            android:id="@+id/heading5"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="my link"
+            android:textColor="@color/navyblue"
+            android:layout_marginTop="10dp"
+            android:textSize="21sp"
+            android:id="@+id/mylink5"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Government and Organization Helplines"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:textSize="15sp"
+            android:id="@+id/heading6"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="my link"
+            android:textColor="@color/navyblue"
+            android:layout_marginTop="10dp"
+            android:textSize="21sp"
+            android:id="@+id/mylink6"/>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Gender Based Violence reporting website "
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:textSize="15sp"
+            android:id="@+id/heading7"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="my link"
+            android:textColor="@color/navyblue"
+            android:layout_marginTop="10dp"
+            android:textSize="21sp"
+            android:id="@+id/mylink7"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Self help group for peopple who have undergone Gender Based Violence "
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="20dp"
+            android:textSize="15sp"
+            android:id="@+id/heading8"/>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="my link"
+            android:textColor="@color/navyblue"
+            android:layout_marginTop="10dp"
+            android:textSize="21sp"
+            android:id="@+id/mylink8"/>
+
+    </LinearLayout>
+
+
+</ScrollView>
