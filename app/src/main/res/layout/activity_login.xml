@@ -66,6 +66,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
 
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_marginTop="10dp"
@@ -81,9 +82,11 @@
                 android:background="@drawable/border"
                 android:textSize="22sp"
                 android:textColorHint="@color/black"
-                app:passwordToggleEnabled="true"
+                app:endIconMode="password_toggle"/>
+<!--                app:passwordToggleEnabled="true"-->
 
-                />
+
+<!--                />-->
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -177,4 +180,9 @@
 <!--                    android:onClick="GoLogin"-->
 <!--                    android:id="@+id/google"-->
 <!--                    android:contentDescription="@string/google"-->
-<!--                    />-->
+<!--&lt;!&ndash;                    />&ndash;&gt;-->
+<!--    app:startIconDrawable="@drawable/ic_lock_24"-->
+<!--    app:startIconTint="@color/colorpink"-->
+<!--    app:endIconMode="password_toggle"-->
+<!--    app:endIconTint="@color/colorpink">-->
+

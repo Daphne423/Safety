@@ -109,6 +109,8 @@ public class LocationActivity extends AppCompatActivity {
                         "&types" + placeTypeList[i] + //Place Type
                         "&key=" + getResources().getString(R.string.map_key); //Google map key
 
+
+
                // if (String[] placeTypeList = {"hospital","police station"}){
                     //placeTypeList.add();
                 //}
