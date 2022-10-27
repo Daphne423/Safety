@@ -2,7 +2,7 @@
 
 <!-- the root view must be the DrawerLayout -->
 
-<androidx.drawerlayout.widget.DrawerLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,18 +10,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:background="@color/light_blue"
     tools:openDrawer="end"
     tools:ignore="HardcodedText">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
 
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:menu="@menu/nav_menu" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/rect"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome"
+            android:id="@+id/welcome"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="26dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/name"
+            android:layout_below="@id/welcome"
+            android:text="Dashboard"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textSize="18dp"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_baseline_more_white"
+            android:background="@null"
+
+            android:id="@+id/moreBtn"/>
+
+    </RelativeLayout>
+
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="10dp"
         android:background="@color/light_blue"
         tools:context=".MainActivity">
 
@@ -38,22 +72,16 @@
 
         <!--    end of drawer layout-->
 
-        <TextView
-            android:id="@+id/title_dash"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="@string/dashboard"
 
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+
+
 
         <ScrollView
             android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title_dash">
+            android:layout_marginTop="0dp"
+            >
 
             <GridLayout
                 android:id="@+id/grid"
@@ -245,22 +273,43 @@
             <!--        </androidx.cardview.widget.CardView>-->
 
         </ScrollView>
-
-        <ImageButton
-            android:id="@+id/buttonsend"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_below="@id/scroll"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="220dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:adjustViewBounds="true"
-            android:backgroundTint="@color/white"
-            android:scaleType="fitCenter"
-            android:src="@drawable/emergebutton" />
+            android:layout_below="@id/scroll"
+            android:padding="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/start"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:text="Start"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:textSize="26dp"
+                android:background="@drawable/rect2"/>
+            <TextView
+                android:id="@+id/stop"
+                android:layout_width="100dp"
+                android:layout_marginStart="0dp"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="Stop"
+                android:layout_marginTop="40dp"
+                android:textSize="26dp"
+                android:background="@drawable/rect2"/>
+
+
+        </LinearLayout>
+
+
 
 
     </RelativeLayout>
 
 
 
-</androidx.drawerlayout.widget.DrawerLayout>
+</RelativeLayout>
