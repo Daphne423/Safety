@@ -83,10 +83,10 @@
                 android:textSize="22sp"
                 android:textColorHint="@color/black"
                 app:endIconMode="password_toggle"/>
-<!--                app:passwordToggleEnabled="true"-->
 
 
-<!--                />-->
+
+
         </com.google.android.material.textfield.TextInputLayout>
 
 

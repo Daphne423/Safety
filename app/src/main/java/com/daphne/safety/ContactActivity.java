@@ -1,5 +1,8 @@
 package com.daphne.safety;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -8,6 +11,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,21 +19,35 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class ContactActivity extends Activity implements View.OnClickListener, MyAdapter.DeleteListener{
-    private static int PICK_CONTACT = 0;
 
-//    private static final int RQS_PICK_CONTACT = 0;
-//    private static final int CONTACT_PICKER_RESULT = 0;
-    //    private static final boolean EXTRA_SHOW_CHECK_ALL >0 ;
-//    private static final String EXTRA_SELECT_CONTACTS_LIMIT = ;
-//    private static final String EXTRA_ONLY_CONTACTS_WITH_PHONE = ;
-//    private static final String EXTRA_WITH_GROUP_TAB = ;
+
+ private static final int RQS_PICK_CONTACT = 1131;
+
     ListView listNumbers;
     Button btnAdd1;
     ImageView img;
-    TextView names;
+    String deletenumber;
+    String currentUser;
+    //Initialize firebase
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
+//    TextView name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +64,12 @@ public class ContactActivity extends Activity implements View.OnClickListener, M
         btnAdd1 = findViewById(R.id.btnAdd1);
         img = findViewById(R.id.img);
         btnAdd1.setOnClickListener(this);
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         //names = findViewById(R.id.t1);
 
-        addContact();
+        //addContact();
         loadData();
     }
 
@@ -68,6 +88,8 @@ public class ContactActivity extends Activity implements View.OnClickListener, M
 
 
 
+
+
         if (list.size() > 0) {
             img.setVisibility(View.GONE);
         } else {
@@ -78,10 +100,10 @@ public class ContactActivity extends Activity implements View.OnClickListener, M
     @Override
     public void onClick(View view) {
         if (view == btnAdd1) {
-            pickContact();
-//            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//            intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
-//            startActivityForResult(intent, RQS_PICK_CONTACT);
+           // pickContact();
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE);
+            startActivityForResult(intent, RQS_PICK_CONTACT);
 
 
 //       intent.putExtra(ContactActivity.EXTRA_SHOW_CHECK_ALL, true)
@@ -94,17 +116,17 @@ public class ContactActivity extends Activity implements View.OnClickListener, M
 
     }
 
-    private void pickContact(){
-        Intent intent = new Intent(Intent.ACTION_PICK,
-                ContactsContract.Contacts.CONTENT_URI);
-        startActivityForResult(intent, PICK_CONTACT);
-
-    }
+//    private void pickContact(){
+//        Intent intent = new Intent(Intent.ACTION_PICK,
+//                ContactsContract.Contacts.CONTENT_URI);
+//        startActivityForResult(intent, RQS_PICK_CONTACT);
+//
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_CONTACT) {
+        if (requestCode == RQS_PICK_CONTACT) {
           if (resultCode == RESULT_OK) {
                 Uri contactData = data.getData();
                 Cursor cursor = managedQuery(contactData, null, null, null, null);
@@ -116,7 +138,32 @@ public class ContactActivity extends Activity implements View.OnClickListener, M
                 obj.setName(name);
                 obj.setNumber(number);
 
-                MyDatabase db = new MyDatabase(this);
+         //Send Contact to Firebase
+              Map<String, Object> docData = new HashMap<>();
+              docData.put("name", name);
+              docData.put("number", number);
+
+              db.collection("EmergencyContacts").
+                      document(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getUid()))
+                      .collection("MyEmergencyContacts")
+                      .document(number)
+                      .set(docData)
+                      .addOnSuccessListener(new OnSuccessListener<Void>() {
+                          @Override
+                          public void onSuccess(Void aVoid) {
+                              Log.d(TAG, "DocumentSnapshot successfully written!");
+                          }
+                      })
+                      .addOnFailureListener(new OnFailureListener() {
+                          @Override
+                          public void onFailure(@NonNull Exception e) {
+                              Log.w(TAG, "Error writing document", e);
+                          }
+                      });
+
+
+
+              MyDatabase db = new MyDatabase(this);
                 if (db.saveContact(obj)) {
 
                     Toast.makeText(this, "Added successfully", Toast.LENGTH_SHORT).show();
@@ -133,8 +180,36 @@ public class ContactActivity extends Activity implements View.OnClickListener, M
 
     @Override
     public void deleteItem(Contacts c) {
+      //Delete contact from Firebase
+        deletenumber = c.getNumber();
+        db.collection("EmergencyContacts").
+                document(Objects.requireNonNull(Objects.requireNonNull(auth.getCurrentUser()).getUid()))
+                .collection("MyEmergencyContact")
+                .document(deletenumber)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+
+
         MyDatabase db = new MyDatabase(this);
         if (db.deleteContact(c.getNumber())) {
+
+
+
+
+
+
+
             Toast.makeText(this, "DELETED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
 
             loadData();
@@ -143,6 +218,8 @@ public class ContactActivity extends Activity implements View.OnClickListener, M
 
         }
     }
+
+
 }
 
 //    ImageButton button = (ImageButton) findViewById(R.id.pick_contact);

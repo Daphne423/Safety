@@ -2,21 +2,53 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AboutActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rect"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ABOUT"
+            android:id="@+id/welcome"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="26dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/name"
+            android:layout_below="@id/welcome"
+            android:text="SafeScape"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:textSize="18dp"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_baseline_more_white"
+            android:background="@null"
 
+            android:id="@+id/moreBtn"/>
 
-
+    </RelativeLayout>
 
 
 <ScrollView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/light_blue"
+    android:background="@color/white"
     android:layout_marginStart="0dp"
     android:layout_marginEnd="0dp"
-    android:layout_marginTop="0dp"
+    android:layout_marginTop="88dp"
     >
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -31,34 +63,13 @@
         android:orientation="vertical"
         android:padding="9dp"
         android:id="@+id/abouttext">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/heading"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:textSize="30sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:id="@+id/title_about" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/subheading"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:textSize="25sp"
-            android:textColor="@color/black"
-            android:textStyle="normal"
-            android:id="@+id/title_info" />
 
         <TextView
             android:id="@+id/info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:background="@color/light_blue"
+            android:background="@color/white"
             android:fontFamily="@font/abhaya_libr"
             android:text="@string/text"
             android:textColor="@color/black"
