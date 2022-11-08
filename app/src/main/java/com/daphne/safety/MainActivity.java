@@ -173,20 +173,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent i;
 
         switch (v.getId()){
-            case R.id.Contact:i=new Intent(this,ScreenContactActivity.class);startActivity(i);
+            case R.id.Contact:i=new Intent(this,ContactActivity.class);startActivity(i);
             break;
             case R.id.location:i = new Intent(this,LocationActivity.class);startActivity(i);
             break;
             case R.id.tips:i= new Intent(this, TipsActivity.class);startActivity(i);
             break;
-            case R.id.start:i= new Intent(this, StartActivity.class);startActivity(i);
-            break;
-            case R.id.stop:i= new Intent(this, StopActivity.class);startActivity(i);
-            break;
             case R.id.about:i = new Intent(this, AboutActivity.class);startActivity(i);
             default:break;
-//          case R.id.buttonsend:i = new Intent(this, ButtonActivity.class);startActivity(i);
-//           default:break;
+//            case R.id.buttonsend:i = new Intent(this, ButtonActivity.class);startActivity(i);
+//            default:break;
         }
     }
     // override the onOptionsItemSelected()
