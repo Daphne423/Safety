@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
 
@@ -21,8 +24,9 @@
         android:theme="@style/Theme.Safety"
         tools:targetApi="31">
         <activity
-            android:name=".SettingsActivity"
-            android:exported="false">
+            android:name=".MySettingsActivity"
+            android:exported="false"
+            tools:ignore="Instantiatable,MissingClass">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -55,18 +59,14 @@
             android:exported="false" />
         <activity
             android:name=".AboutActivity"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".Contact" -->
-        <!-- android:exported="false" /> -->
+            android:exported="false" />
         <activity
             android:name=".LocationActivity"
             android:exported="false" />
         <activity
             android:name=".TipsActivity"
             android:exported="false" />
-        <activity
-            android:name=".ButtonActivity"
-            android:exported="false" />
+
         <activity
             android:name=".LoginActivity"
             android:exported="false" />

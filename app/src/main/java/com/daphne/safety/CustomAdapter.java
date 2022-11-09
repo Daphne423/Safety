@@ -58,7 +58,7 @@ public class CustomAdapter extends ArrayAdapter<ContactModel> {
             @Override
             public boolean onLongClick(View view) {
                 // generate an MaterialAlertDialog Box
-                new MaterialAlertDialogBuilder(context)
+                new MaterialAlertDialogBuilder(context ,R.style.Theme_MyApp_Dialog_Alert)
                         .setTitle("Remove Contact")
                         .setMessage("Are you sure want to remove this contact?")
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {

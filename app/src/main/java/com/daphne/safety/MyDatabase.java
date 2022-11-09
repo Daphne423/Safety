@@ -1,5 +1,6 @@
 package com.daphne.safety;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -46,6 +47,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         return status;
     }
 
+    @SuppressLint("Range")
     public ArrayList<Contacts> loadContacts() {
 
         ArrayList<Contacts> contactList = new ArrayList<Contacts>();
@@ -106,6 +108,7 @@ public class MyDatabase extends SQLiteOpenHelper {
         return status;
     }
 
+    @SuppressLint("Range")
     public ArrayList<Templates> loadTemplates() {
         ArrayList<Templates> templateList = new ArrayList<Templates>();
         SQLiteDatabase db = getReadableDatabase();
@@ -122,6 +125,7 @@ public class MyDatabase extends SQLiteOpenHelper {
     }
 
 
+    @SuppressLint("Range")
     public Templates loadPrimaryTemplate() {
         Templates obj = null;
         SQLiteDatabase db = getReadableDatabase();

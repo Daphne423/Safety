@@ -1,7 +1,6 @@
 package com.daphne.safety;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -11,7 +10,6 @@ import android.os.Bundle;
 //import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -61,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean onMenuItemClick(MenuItem menuitem) {
                 if(menuitem.getTitle() == "Settings"){
-                    startActivity(new Intent(MainActivity.this,SettingsActivity.class));
+                    startActivity(new Intent(MainActivity.this, MySettingsActivity.class));
 
                 }else if(menuitem.getTitle() == "Share"){
                     Intent sharingIntent = new Intent(Intent.ACTION_SEND);
