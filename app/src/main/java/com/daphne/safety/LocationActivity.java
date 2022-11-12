@@ -3,6 +3,7 @@ package com.daphne.safety;
 import static android.net.wifi.WifiConfiguration.Status.strings;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -38,6 +39,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class LocationActivity extends AppCompatActivity {
     //Initialize variable
@@ -238,6 +240,7 @@ public class LocationActivity extends AppCompatActivity {
 
         }
 
+    @SuppressLint("StaticFieldLeak")
     private class ParserTask extends AsyncTask<String,Integer, List<HashMap<String,String>>> {
         @Override
         protected List<HashMap<String, String>> doInBackground(String... strings) {
@@ -258,7 +261,7 @@ public class LocationActivity extends AppCompatActivity {
             return mapList;
         }
         @Override
-        protected void onPostExecute(List<HashMap<String,String>>hashmaps){
+        public void onPostExecute(List<HashMap<String, String>> hashmaps){
             //Clear map
             g_map.clear();
             //Use for loop
@@ -266,9 +269,9 @@ public class LocationActivity extends AppCompatActivity {
                 //Initialize hash map
                 HashMap<String,String> hashMapList = hashmaps.get(i);
                 //Get Latitude
-                double lat = Double.parseDouble(hashMapList.get("lat"));
+                double lat = Double.parseDouble(Objects.requireNonNull(hashMapList.get("lat")));
                 //Get longitude
-                double lng = Double.parseDouble(hashMapList.get("lng"));
+                double lng = Double.parseDouble(Objects.requireNonNull(hashMapList.get("lng")));
                 //Get name
                 String name = hashMapList.get("name");
                 //Concat Latitude and Longitude

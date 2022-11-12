@@ -54,6 +54,8 @@ public class SensorService extends Service {
         return START_STICKY;
     }
 
+
+
     @Override
     public void onCreate() {
 
@@ -109,6 +111,11 @@ public class SensorService extends Service {
                                 // get the SMSManager
                                 SmsManager smsManager = SmsManager.getDefault();
 
+                                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                                sendIntent.putExtra("sms_body", "default content");
+                                sendIntent.setType("vnd.android-dir/mms-sms");
+                                startActivity(sendIntent);
+
                                 // get the list of all the contacts in Database
                                 DbHelper db = new DbHelper(SensorService.this);
                                 List<ContactModel> list = db.getAllContacts();
@@ -149,6 +156,8 @@ public class SensorService extends Service {
         // register the listener
         mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
     }
+    //
+
 
     // method to vibrate the phone
     public void vibrate() {
@@ -206,6 +215,9 @@ public class SensorService extends Service {
         this.sendBroadcast(broadcastIntent);
         super.onDestroy();
     }
+
+
+
 
 }
 

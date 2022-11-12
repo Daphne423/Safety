@@ -3,15 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MySettingsFragment"
+    tools:context=".MySettingsActivity"
     android:orientation="vertical">
 
 
-    <androidx.fragment.app.FragmentContainerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/settings_container"/>
-<!--        android:name="com.google.android.MySettingsFragment"/>-->
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:id="@+id/settings_container"/>-->
+<!--       android:name="com.google.android.MySettingsFragment"/>&ndash;&gt;-->
 
 
 </LinearLayout>

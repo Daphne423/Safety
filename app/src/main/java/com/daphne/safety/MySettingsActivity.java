@@ -1,17 +1,35 @@
+//package com.daphne.safety;
+//
+//import android.os.Bundle;
+//
+//import androidx.appcompat.app.AppCompatActivity;
+//
+//
+//public class MySettingsActivity extends AppCompatActivity {
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+////        getSupportFragmentManager()
+////                .beginTransaction()
+////                .replace(R.id.settings_container, new MySettingsFragment())
+////                .commit();
+//    }
+//}
+
 package com.daphne.safety;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.preference.PreferenceFragmentCompat;
 
 
-public class MySettingsActivity extends AppCompatActivity {
+public class MySettingsActivity extends PreferenceFragmentCompat {
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreatePreferences(Bundle savedInstanceState, String rootkey) {
         super.onCreate(savedInstanceState);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.settings_container, new MySettingsFragment())
-                .commit();
+        setPreferencesFromResource(R.xml.preferences, rootkey);
     }
+
 }
