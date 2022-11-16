@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,10 +42,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     CardView contact, location, tips, about;
     ImageButton  moreBtn;
-    Button button;
+    //Button button;
     FirebaseAuth firebaseAuth;
+    ImageButton reports;
     TextView nameTv;
-    Button btnSendSms;
+    Button btnSendSms ,startSend;
     // nav
     public DrawerLayout drawerLayout;
     //public ActionBarDrawerToggle actionBarDrawerToggle;
@@ -59,10 +61,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         location = findViewById(R.id.location);
         tips = findViewById(R.id.tips);
         about = findViewById(R.id.about);
+        startSend = findViewById(R.id.startSend);
         btnSendSms = findViewById(R.id.btnSendSms);
         // declaring this on click listener
         moreBtn = findViewById(R.id.moreBtn);
         nameTv = findViewById(R.id.name);
+        reports = findViewById(R.id.reports);
+
+        reports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ReportsActivity.class);
+                startActivity(intent);
+            }
+        });
         btnSendSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,8 +133,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        //String myname = ""+dataSnapshot.child("name").getValue();
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
                             String name = "" + ds.child("name").getValue();
+
+                            if(name.equals("Daphne Wambugu ")){
+                                reports.setVisibility(View.VISIBLE);
+                            }else{
+                                reports.setVisibility(View.GONE);
+                            }
+
 
                             nameTv.setText(name);
 

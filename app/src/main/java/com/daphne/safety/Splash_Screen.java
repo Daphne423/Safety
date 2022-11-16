@@ -1,5 +1,6 @@
 package com.daphne.safety;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,6 +14,11 @@ import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
@@ -32,22 +38,38 @@ public class Splash_Screen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        Thread thread = new Thread() {
+        // start login activity after 2sec
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                try {
-                    sleep(1000);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    Intent welcomeIntent = new Intent(Splash_Screen.this, LoginActivity.class);
-                    startActivity(welcomeIntent);
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user==null){
+                    startActivity(new Intent(Splash_Screen.this, RegistrationActivity.class));
+                    finish();
+                }else{
+                    checkUserType ();
                 }
-
             }
+        }, 1000);
 
-        };
-        thread.start();
+                // to remove
+
+//        Thread thread = new Thread() {
+//            @Override
+//            public void run() {
+//                try {
+//                    sleep(1000);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                } finally {
+//                    Intent welcomeIntent = new Intent(Splash_Screen.this, LoginActivity.class);
+//                    startActivity(welcomeIntent);
+//                }
+//
+//            }
+//
+//        };
+       //
 //        Objects.requireNonNull(getSupportActionBar()).hide();
 //
 //        logo=findViewById(R.id.log);
@@ -68,6 +90,23 @@ public class Splash_Screen extends AppCompatActivity {
 //        logo.startAnimation(animation);
 //
   }
+
+    private void checkUserType() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(firebaseAuth.getUid())
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        startActivity(new Intent(Splash_Screen.this,MainActivity.class));
+                        finish();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
 
 
 }
