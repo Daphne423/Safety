@@ -7,13 +7,18 @@ import static com.klinker.android.send_message.Transaction.settings;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Location;
 import android.os.Bundle;
 //import android.view.KeyEvent;
 import android.telephony.SmsManager;
@@ -24,7 +29,9 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.location.Location;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,20 +40,26 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import android.content.Intent;
 import com.klinker.android.send_message.Message;
 import com.klinker.android.send_message.Transaction;
+
+
 
 import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    CardView contact, location, tips, about;
+    CardView contact, location1, tips, about;
     ImageButton  moreBtn;
     //Button button;
     FirebaseAuth firebaseAuth;
     ImageButton reports;
     TextView nameTv;
     Button btnSendSms ,startSend;
+//    FusedLocationProviderClient fusedLocationProviderClient;
+//    double currentLat = 0, currentLong = 0;
+
     // nav
     public DrawerLayout drawerLayout;
     //public ActionBarDrawerToggle actionBarDrawerToggle;
@@ -58,11 +71,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         contact = findViewById(R.id.Contact);
-        location = findViewById(R.id.location);
+        location1 = findViewById(R.id.location);
         tips = findViewById(R.id.tips);
         about = findViewById(R.id.about);
         startSend = findViewById(R.id.startSend);
         btnSendSms = findViewById(R.id.btnSendSms);
+
+
+
+
         // declaring this on click listener
         moreBtn = findViewById(R.id.moreBtn);
         nameTv = findViewById(R.id.name);
@@ -75,14 +92,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
+;
+
+
+
+
+
+
+        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS}, PackageManager.PERMISSION_GRANTED);
         btnSendSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                {
+//                    Intent = new intent(MainActivity.this, SensorService.class);
+//                    startActivity(intent);
+//                    finish();
+//                }
+
+//                startActivity(new Intent(MainActivity.this, SensorService.class));
+//                finish();
+
 
                 sendMessage();
+
+//                Intent = new Intent(MainActivity.this, SensorService.class);
+//                startActivity(intent);
+//                finish();
+
+
+
+
             }
         });
-
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -156,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
 
         contact.setOnClickListener(this);
-        location.setOnClickListener(this);
+        location1.setOnClickListener(this);
         tips.setOnClickListener(this);
         about.setOnClickListener(this);
         //button.setOnClickListener(this);
@@ -187,29 +228,85 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        ;
     }
 
+//    private void onSuccess(Location location) {
+//
+//
+//    }
+
+//    private void getCurrentLocation() {
+//    }
+
+    SmsManager sms = SmsManager.getDefault();
     private void sendMessage() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                com.klinker.android.send_message.Settings sendSettings = new com.klinker.android.send_message.Settings();
-                //sendSettings.setMmsc(settings.getMmsc());
-                //sendSettings.setProxy(settings.getMmsProxy());
-                //sendSettings.setPort(settings.getMmsPort());
-                sendSettings.setUseSystemSending(true);
 
-                Transaction transaction = new Transaction(MainActivity.this, sendSettings);
-                String theM = "Hello world!";
-                String phone = "254792935763";
+//        addOnSuccessListener(new OnSuccessListener<Location>() {
+//            @Override
+//            public void onSuccess(Location location) {
+//
+//            }
+//        });
 
-                Message message = new Message(theM, phone);
+      //   get the list of all the contacts in Database
+            DbHelper db = new DbHelper(MainActivity.this);
+            List<ContactModel> list = db.getAllContacts();
+//            displaylocation();
+
+        for (ContactModel c : list) {
+            String message = "Hey, " + c.getName() + "I am in DANGER, i need help. Please urgently reach me out. Here are my coordinates.\n " + "http://maps.google.com/?q=";
+//                    + location.getLatitude() + "," + location.getLongitude();
+            sms.sendTextMessage(c.getPhoneNo(), null, message, null, null);
+
+        }
+
+        }
 
 
 
-                transaction.sendNewMessage(message, Transaction.NO_THREAD_ID);
-            }
-        }).start();
 
-    }
+
+//        String messageToSend = "this is a message";
+//        String number = "+254780754884";
+//        sms.sendTextMessage(c.getPhoneNo(), null, message, null, null);
+
+//        sms.sendTextMessage(number, null, messageToSend, null,null);
+
+
+
+
+
+//    public void onSuccess(Location location) {
+//        // check if location is null
+//        // for both the cases we will
+//        // create different messages
+//        if (location != null) {
+//
+//            // get the SMSManager
+//            SmsManager smsManager = SmsManager.getDefault();
+//
+//            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+//            sendIntent.putExtra("sms_body", "default content");
+//            sendIntent.setType("vnd.android-dir/mms-sms");
+//            startActivity(sendIntent);
+//
+//            // get the list of all the contacts in Database
+//            DbHelper db = new DbHelper(SensorService.this);
+//            List<ContactModel> list = db.getAllContacts();
+//
+//            // send SMS to each contact
+//            for (ContactModel c : list) {
+//                String message = "Hey, " + c.getName() + "I am in DANGER, i need help. Please urgently reach me out. Here are my coordinates.\n " + "http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
+//                smsManager.sendTextMessage(c.getPhoneNo(), null, message, null, null);
+//            }
+//        } else {
+//            String message = "I am in DANGER, i need help. Please urgently reach me out.\n" + "GPS was turned off.Couldn't find location. Call your nearest Police Station.";
+//            SmsManager smsManager = SmsManager.getDefault();
+//            DbHelper db = new DbHelper(SensorService.this);
+//            List<ContactModel> list = db.getAllContacts();
+//            for (ContactModel c : list) {
+//                smsManager.sendTextMessage(c.getPhoneNo(), null, message, null, null);
+//            }
+//        }
+//    }
 
     // drawer layout instance to toggle the menu icon to open
     // drawer and back button to close drawer
@@ -327,7 +424,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            PendingIntent pi=PendingIntent.getActivity(getApplicationContext(), 0, intent,0);
 //
             // get the SMSManager
-            SmsManager sms = SmsManager.getDefault();
+//            SmsManager sms = SmsManager.getDefault();
 
 //        Intent sendIntent = new Intent(Intent.ACTION_VIEW);
 //        sendIntent.putExtra("sms_body", "default content");

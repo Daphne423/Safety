@@ -111,10 +111,10 @@ public class SensorService extends Service {
                                 // get the SMSManager
                                 SmsManager smsManager = SmsManager.getDefault();
 
-                                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
-                                sendIntent.putExtra("sms_body", "default content");
-                                sendIntent.setType("vnd.android-dir/mms-sms");
-                                startActivity(sendIntent);
+//                                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+//                                sendIntent.putExtra("sms_body", "default content");
+//                                sendIntent.setType("vnd.android-dir/mms-sms");
+//                                startActivity(sendIntent);
 
                                 // get the list of all the contacts in Database
                                 DbHelper db = new DbHelper(SensorService.this);
