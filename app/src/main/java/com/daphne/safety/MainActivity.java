@@ -2,9 +2,8 @@ package com.daphne.safety;
 
 import static android.app.ProgressDialog.show;
 
-import static com.klinker.android.send_message.Transaction.settings;
-
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
@@ -12,13 +11,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.PendingIntent;
-import android.app.Service;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
-import android.location.Address;
-import android.location.Location;
 import android.os.Bundle;
 //import android.view.KeyEvent;
 import android.telephony.SmsManager;
@@ -29,21 +25,15 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.location.Location;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
+
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import android.content.Intent;
-import com.klinker.android.send_message.Message;
-import com.klinker.android.send_message.Transaction;
-
 
 
 import java.util.HashMap;
@@ -56,12 +46,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     FirebaseAuth firebaseAuth;
     ImageButton reports;
     TextView nameTv;
-    Button btnSendSms ,startSend;
+    Button btnSendSms,btnSafeLocation;
 //    FusedLocationProviderClient fusedLocationProviderClient;
 //    double currentLat = 0, currentLong = 0;
 
     // nav
     public DrawerLayout drawerLayout;
+
+    private Context context;
+    private boolean mDeleted = false;
     //public ActionBarDrawerToggle actionBarDrawerToggle;
 
     @SuppressLint("WrongViewCast")
@@ -74,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         location1 = findViewById(R.id.location);
         tips = findViewById(R.id.tips);
         about = findViewById(R.id.about);
-        startSend = findViewById(R.id.startSend);
+        btnSafeLocation = findViewById(R.id.safeLocation);
         btnSendSms = findViewById(R.id.btnSendSms);
 
 
@@ -85,43 +78,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         nameTv = findViewById(R.id.name);
         reports = findViewById(R.id.reports);
 
+
         reports.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ReportsActivity.class);
+                Intent intent = new Intent(MainActivity.this, BarChartActivity.class);
                 startActivity(intent);
             }
         });
-;
+
+
+        btnSendSms.setOnClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                // generate an MaterialAlertDialog Box
+                MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(context, R.style.AlertDialogCustom);
+                alertDialogBuilder.setTitle("Send Message Alert");
+                alertDialogBuilder.setMessage("Are you sure want to send an emergency message?");
+                alertDialogBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(MainActivity.this, SendActivity.class);
+                        startActivity(intent);
+                        finish();
+                        Toast.makeText(context, "Sending Message...", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                AlertDialog alertDialog = alertDialogBuilder
+                        .show();
 
 
 
-
-
+            return;
+            }
+        });
 
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS}, PackageManager.PERMISSION_GRANTED);
-        btnSendSms.setOnClickListener(new View.OnClickListener() {
+        btnSafeLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                {
-//                    Intent = new intent(MainActivity.this, SensorService.class);
-//                    startActivity(intent);
-//                    finish();
-//                }
-
-//                startActivity(new Intent(MainActivity.this, SensorService.class));
-//                finish();
-
-
-                sendMessage();
-
-//                Intent = new Intent(MainActivity.this, SensorService.class);
-//                startActivity(intent);
-//                finish();
-
-
-
-
+                stopMessage();
             }
         });
 
@@ -228,6 +231,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        ;
     }
 
+    private void stopMessage() {
+        SmsManager sms = SmsManager.getDefault();
+
+                // get the list of all the contacts in Database
+                DbHelper db = new DbHelper(MainActivity.this);
+                List<ContactModel> list = db.getAllContacts();
+
+                // send SMS to each contact
+                for (ContactModel c : list) {
+                    String message = "Hey, " + c.getName() + "I am now at a SAFE Location,Thanks for the lookout.";
+                    sms.sendTextMessage(c.getPhoneNo(), null, message, null, null);
+                }
+                Toast.makeText(getApplicationContext(), "Message Sent successfully!",
+                        Toast.LENGTH_LONG).show();
+
+    }
+
 //    private void onSuccess(Location location) {
 //
 //
@@ -239,12 +259,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SmsManager sms = SmsManager.getDefault();
     private void sendMessage() {
 
-//        addOnSuccessListener(new OnSuccessListener<Location>() {
-//            @Override
-//            public void onSuccess(Location location) {
-//
-//            }
-//        });
+
 
       //   get the list of all the contacts in Database
             DbHelper db = new DbHelper(MainActivity.this);
@@ -252,9 +267,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            displaylocation();
 
         for (ContactModel c : list) {
+            String phone = "+254792935763";
             String message = "Hey, " + c.getName() + "I am in DANGER, i need help. Please urgently reach me out. Here are my coordinates.\n " + "http://maps.google.com/?q=";
 //                    + location.getLatitude() + "," + location.getLongitude();
-            sms.sendTextMessage(c.getPhoneNo(), null, message, null, null);
+            sms.sendTextMessage(phone, null, message, null, null);
 
         }
 
