@@ -2,6 +2,10 @@ package com.daphne.safety;
 
 import static android.app.ProgressDialog.show;
 
+import static androidx.core.os.LocaleListCompat.create;
+
+import static com.google.android.material.internal.ContextUtils.getActivity;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,14 +51,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton reports;
     TextView nameTv;
     Button btnSendSms,btnSafeLocation;
+    Context context;
 //    FusedLocationProviderClient fusedLocationProviderClient;
 //    double currentLat = 0, currentLong = 0;
 
     // nav
     public DrawerLayout drawerLayout;
 
-    private Context context;
-    private boolean mDeleted = false;
+
+
     //public ActionBarDrawerToggle actionBarDrawerToggle;
 
     @SuppressLint("WrongViewCast")
@@ -79,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         reports = findViewById(R.id.reports);
 
 
+
+
         reports.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,39 +93,115 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
             }
         });
-
-
-        btnSendSms.setOnClickListener(new View.OnLongClickListener() {
+///////////////////////////////////////////Was working no error but Crashed
+        btnSendSms.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View view) {
-
+            public void onClick(View view) {
                 // generate an MaterialAlertDialog Box
-                MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(context, R.style.AlertDialogCustom);
-                alertDialogBuilder.setTitle("Send Message Alert");
-                alertDialogBuilder.setMessage("Are you sure want to send an emergency message?");
-                alertDialogBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setCancelable(true);
+                builder.setTitle("Send Message Alert");
+                builder.setMessage("Are you sure want to send an emergency message?");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent = new Intent(MainActivity.this, SendActivity.class);
                         startActivity(intent);
                         finish();
-                        Toast.makeText(context, "Sending Message...", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Sending Message...", Toast.LENGTH_SHORT).show();
                     }
                 });
-                alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
 
                     }
                 });
-                AlertDialog alertDialog = alertDialogBuilder
-                        .show();
+                AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
 
-
-
-            return;
             }
         });
+
+//        btnSendSms.setOnClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View view) {
+//                // generate an MaterialAlertDialog Box
+//                // Use the Builder class for convenient dialog construction
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                builder.setTitle("Send Message Alert");
+//                builder.setMessage("Are you sure want to send an emergency message?")
+//                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                Intent intent = new Intent(MainActivity.this, SendActivity.class);
+//                                startActivity(intent);
+//                                finish();
+//                                Toast.makeText(context, "Sending Message...", Toast.LENGTH_SHORT).show();
+//                            }
+//                        })
+//                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                builder.dismiss();
+//                  }
+//                        });
+//                // Create the AlertDialog object and return it
+//                return builder.create();
+//
+//                return true;
+//            }
+//        });
+
+
+//        btnSendSms.setOnClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View view) {
+//                // generate an MaterialAlertDialog Box
+//                MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(context, R.style.AlertDialogCustom);
+//                alertDialogBuilder.setTitle("Send Message Alert");
+//                alertDialogBuilder.setMessage("Are you sure want to send an emergency message?");
+//                alertDialogBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        Intent intent = new Intent(MainActivity.this, SendActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                        Toast.makeText(context, "Sending Message...", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//                alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                    }
+//                });
+//                AlertDialog alertDialog = alertDialogBuilder
+//                        .show();
+//                return alertDialog;
+//            }
+//        });
+//        public Dialog showDialog(String title, String msg, final Activity activity) {
+//
+//            final AlertDialog alertDialog = new AlertDialog.Builder(activity)
+//                    .create();
+//            alertDialog.setTitle(title);
+//            alertDialog.setMessage(msg);
+//            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int which) {
+//                    alertDialog.dismiss();
+//
+//                    activity.finish();
+//
+//                }
+//            });
+//            alertDialog.show();
+//
+//            return alertDialog;
+//
+//        }
+//
+
+
 
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS}, PackageManager.PERMISSION_GRANTED);
         btnSafeLocation.setOnClickListener(new View.OnClickListener() {
@@ -231,6 +314,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        ;
     }
 
+//       btnSafeLocation.
     private void stopMessage() {
         SmsManager sms = SmsManager.getDefault();
 

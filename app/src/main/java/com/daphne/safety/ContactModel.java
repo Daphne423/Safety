@@ -16,7 +16,7 @@ public class ContactModel {
     private String validate(String phone) {
 
         // creating StringBuilder for both the cases
-        StringBuilder case1 = new StringBuilder("");
+        StringBuilder case1 = new StringBuilder("+254");
         StringBuilder case2 = new StringBuilder("");
 
         // check if the string already has a "+"
