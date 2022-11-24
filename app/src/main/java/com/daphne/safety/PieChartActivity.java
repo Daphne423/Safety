@@ -77,16 +77,16 @@ public class PieChartActivity extends AppCompatActivity {
         yValues.add(new PieEntry(2.5f, "April"));
         yValues.add(new PieEntry(3f, "May"));
         yValues.add(new PieEntry(0f, "June"));
-        yValues.add(new PieEntry(6f, "July"));
-        yValues.add(new PieEntry(2.5f, "August"));
-        yValues.add(new PieEntry(6f, "September"));
-        yValues.add(new PieEntry(7.5f, "October"));
-        yValues.add(new PieEntry(2.5f, "November"));
+        yValues.add(new PieEntry(4.8f, "July"));
+        yValues.add(new PieEntry(2f, "August"));
+        yValues.add(new PieEntry(3.6f, "September"));
+        yValues.add(new PieEntry(4.5f, "October"));
+        yValues.add(new PieEntry(1.25f, "November"));
         yValues.add(new PieEntry(0f, "December"));
 
         pieChart.animateY(1400, Easing.EaseInOutQuad);
 
-        PieDataSet dataSet = new PieDataSet(yValues, "How many registered users how many have accessed the resources");
+        PieDataSet dataSet = new PieDataSet(yValues, "How many of the new user per month have used the emergency button");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);

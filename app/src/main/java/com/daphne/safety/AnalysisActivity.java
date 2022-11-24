@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class AnalysisActivity extends AppCompatActivity {
-    Button btnBar, btnLine, btnChart;
+    Button btnBar,btnChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class AnalysisActivity extends AppCompatActivity {
 
 
         btnBar = findViewById(R.id.btnBar);
-        btnLine = findViewById(R.id.btnLine);
+//        btnLine = findViewById(R.id.btnLine);
         btnChart = findViewById(R.id.btnPie);
 
 
@@ -32,15 +32,15 @@ public class AnalysisActivity extends AppCompatActivity {
             }
         });
 
-        btnLine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AnalysisActivity.this, LineGraphActivity.class);
-                startActivity(intent);
-
-            }
-
-        });
+//        btnLine.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(AnalysisActivity.this, LineGraphActivity.class);
+//                startActivity(intent);
+//
+//            }
+//
+//        });
 
         btnChart.setOnClickListener(new View.OnClickListener() {
             @Override

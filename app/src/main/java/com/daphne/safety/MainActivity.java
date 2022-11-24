@@ -34,6 +34,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // nav
     public DrawerLayout drawerLayout;
+    private double latitude,longitude;
 
 
     //public ActionBarDrawerToggle actionBarDrawerToggle;
@@ -105,30 +107,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                            // TODO: Consider calling
-                            //    ActivityCompat#requestPermissions
-                            // here to request the missing permissions, and then overriding
-                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                            //                                          int[] grantResults)
-                            // to handle the case where the user grants the permission. See the documentation
-                            // for ActivityCompat#requestPermissions for more details.
-                            return;
-                        }
-                        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                        double longitude = location.getLongitude();
-                        double latitude = location.getLatitude();
+//                        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                            // TODO: Consider calling
+//                            //    ActivityCompat#requestPermissions
+//                            // here to request the missing permissions, and then overriding
+//                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                            //                                          int[] grantResults)
+//                            // to handle the case where the user grants the permission. See the documentation
+//                            // for ActivityCompat#requestPermissions for more details.
+//                            return;
+//                        }
+//                        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
 
 
-                // get the list of all the contacts in Database
+//                            double longitude = location.getLongitude();
+//                            double latitude = location.getLatitude();
+
+
+
+
+
+
+
+                        // get the list of all the contacts in Database
                 DbHelper db = new DbHelper(MainActivity.this);
                 List<ContactModel> list = db.getAllContacts();
 
                 // send SMS to each contact
                 for (ContactModel c : list) {
-                    String message = "Hey,In an emergency situation."+""+ "Sending my location now"+""+"http://maps.google.com/?q="+latitude+","+longitude;
+                    String message = "Hey,In an emergency situation."+""+ "Sending my location now,,..."+""+""+ "http://maps.google.com/?q="+latitude+","+longitude;
 
 
                     sms.sendTextMessage(c.getPhoneNo(), null, message, null, null);

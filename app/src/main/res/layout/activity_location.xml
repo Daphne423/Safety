@@ -1,74 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/location_search"
-            android:layout_width="348dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:ems="10"
-            android:hint="@string/search_here"
-            android:textColorHint="@color/black"
-            android:autofillHints="Location" />
-
-
-        <ImageView
-            android:id="@+id/search_address"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:onClick="onClick"
-            android:src="@drawable/search"
-            tools:ignore="UsingOnClickInXml" />
-
-    </RelativeLayout>
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="50dp"
-        tools:context=".LocationActivity" />
-
+        tools:context=".AnalysisActivity">
     <RelativeLayout
-        android:id="@+id/second_relative_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageButton
-            android:id="@+id/hospital_nearby"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbar"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:onClick="onClick"
-            android:layout_marginStart="70dp"
-            android:src="@drawable/hospital"
-            tools:ignore="UsingOnClickInXml" />
+            android:background="@drawable/rect"
+            android:padding="10dp">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/maps"
+                android:id="@+id/maps"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="26sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/name"
+                android:layout_below="@id/maps"
+                android:text="@string/nearest_location"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
 
-        <ImageButton
-            android:id="@+id/police_nearby"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@+id/hospital_nearby"
-            android:src="@drawable/police"
-            android:onClick="onClick"
-            tools:ignore="UsingOnClickInXml" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:id="@+id/report">
 
 
+            <Button
+                android:id="@+id/Hos"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="250dp"
+                android:backgroundTint="@color/light_blue"
+                android:gravity="center"
+                android:text="@string/h_pital"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+
+            <Button
+                android:id="@+id/Police"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="100dp"
+                android:backgroundTint="@color/light_blue"
+                android:gravity="center"
+                android:text="@string/police_station"
+                android:textSize="20sp"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 
-</RelativeLayout>
+
+    <!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/location_search"-->
+<!--            android:layout_width="348dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:ems="10"-->
+<!--            android:hint="@string/search_here"-->
+<!--            android:textColorHint="@color/black"-->
+<!--            android:autofillHints="Location" />-->
+
+
+<!--        <ImageView-->
+<!--            android:id="@+id/search_address"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:onClick="onClick"-->
+<!--            android:src="@drawable/search"-->
+<!--            tools:ignore="UsingOnClickInXml" />-->
+
+<!--    </RelativeLayout>-->
+
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/map"-->
+<!--        android:name="com.google.android.gms.maps.SupportMapFragment"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        tools:context=".LocationActivity" />-->
+
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/second_relative_layout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/hospital_nearby"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:onClick="onClick"-->
+<!--            android:layout_marginStart="70dp"-->
+<!--            android:src="@drawable/hospital"-->
+<!--            tools:ignore="UsingOnClickInXml" />-->
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/police_nearby"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_toEndOf="@+id/hospital_nearby"-->
+<!--            android:src="@drawable/police"-->
+<!--            android:onClick="onClick"-->
+<!--            tools:ignore="UsingOnClickInXml" />-->
+
+
+
+<!--    </RelativeLayout>-->
+
+<!--</RelativeLayout>-->

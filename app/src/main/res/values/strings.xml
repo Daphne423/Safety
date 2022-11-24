@@ -53,6 +53,10 @@
     <string name="chart">Pie Chart</string>
     <string name="pie_chart">Pie Chart</string>
     <string name="line_graph">Line Graph</string>
+    <string name="police_station">Police Station</string>
+    <string name="h_pital">Hospital</string>
+    <string name="nearest_location">Nearest location</string>
+    <string name="maps">Maps</string>
 
 </resources>
 
