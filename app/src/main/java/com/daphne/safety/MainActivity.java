@@ -19,6 +19,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 //import android.view.KeyEvent;
 import android.telephony.SmsManager;
@@ -42,22 +46,22 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     CardView contact, location1, tips, about;
-    ImageButton  moreBtn;
+    ImageButton moreBtn;
     //Button button;
     FirebaseAuth firebaseAuth;
     ImageButton reports;
     TextView nameTv;
-    Button btnSendSms,btnSafeLocation;
+    Button btnSendSms, btnSafeLocation;
     Context context;
 //    FusedLocationProviderClient fusedLocationProviderClient;
 //    double currentLat = 0, currentLong = 0;
 
     // nav
     public DrawerLayout drawerLayout;
-
 
 
     //public ActionBarDrawerToggle actionBarDrawerToggle;
@@ -76,20 +80,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSendSms = findViewById(R.id.btnSendSms);
 
 
-
-
         // declaring this on click listener
         moreBtn = findViewById(R.id.moreBtn);
         nameTv = findViewById(R.id.name);
         reports = findViewById(R.id.reports);
 
 
-
-
         reports.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, BarChartActivity.class);
+                Intent intent = new Intent(MainActivity.this, AnalysisActivity.class);
                 startActivity(intent);
             }
         });
@@ -105,10 +105,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(MainActivity.this, SendActivity.class);
-                        startActivity(intent);
-                        finish();
-//                        Toast.makeText(context, "Sending Message...", Toast.LENGTH_SHORT).show();
+                        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            //    ActivityCompat#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for ActivityCompat#requestPermissions for more details.
+                            return;
+                        }
+                        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        double longitude = location.getLongitude();
+                        double latitude = location.getLatitude();
+
+
+
+                // get the list of all the contacts in Database
+                DbHelper db = new DbHelper(MainActivity.this);
+                List<ContactModel> list = db.getAllContacts();
+
+                // send SMS to each contact
+                for (ContactModel c : list) {
+                    String message = "Hey,In an emergency situation."+""+ "Sending my location now"+""+"http://maps.google.com/?q="+latitude+","+longitude;
+
+
+                    sms.sendTextMessage(c.getPhoneNo(), null, message, null, null);
+                    Toast.makeText(getApplicationContext(), "Sending Message.....Message Sent successfully!",
+                            Toast.LENGTH_LONG).show();
+                }
+//                        //addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+//                        String phoneNumber = "0792935763";
+//
+//
+//                    String message = "Hey,I am in danger.Please help me out"+"Sending my location now"+"http://maps.google.com/?q="+latitude+","+longitude;
+//                    SmsManager smsManager = SmsManager.getDefault();
+//                    smsManager.sendTextMessage(phoneNumber,null,message,null,null);
+////                        Toast.makeText(context, "Sending Message...", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -119,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
                 AlertDialog alertDialog = builder.create();
-                        alertDialog.show();
+                alertDialog.show();
 
             }
         });
@@ -207,7 +241,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnSafeLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stopMessage();
+                SmsManager sms = SmsManager.getDefault();
+
+                // get the list of all the contacts in Database
+                DbHelper db = new DbHelper(MainActivity.this);
+                List<ContactModel> list = db.getAllContacts();
+
+                // send SMS to each contact
+                for (ContactModel c : list) {
+                    String message = "Hey, I am now at a SAFE Location"+","+"Thanks for the lookout.";
+                    sms.sendTextMessage(c.getPhoneNo(), null, message, null, null);
+                }
+                Toast.makeText(getApplicationContext(), "Message Sent successfully!",
+                        Toast.LENGTH_LONG).show();
+
             }
         });
 
@@ -216,8 +263,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // pop up menu
         PopupMenu popupMenu = new PopupMenu(MainActivity.this, moreBtn);
         // add menu items to our menu
-        popupMenu.getMenu().add("Settings");
-        popupMenu.getMenu().add("Share");
+//        popupMenu.getMenu().add("Settings");
+//        popupMenu.getMenu().add("Share");
         popupMenu.getMenu().add("Logout");
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -314,21 +361,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        ;
     }
 
-//       btnSafeLocation.
+    //       btnSafeLocation.
     private void stopMessage() {
         SmsManager sms = SmsManager.getDefault();
 
-                // get the list of all the contacts in Database
-                DbHelper db = new DbHelper(MainActivity.this);
-                List<ContactModel> list = db.getAllContacts();
+        // get the list of all the contacts in Database
+        DbHelper db = new DbHelper(MainActivity.this);
+        List<ContactModel> list = db.getAllContacts();
 
-                // send SMS to each contact
-                for (ContactModel c : list) {
-                    String message = "Hey, " + c.getName() + "I am now at a SAFE Location,Thanks for the lookout.";
-                    sms.sendTextMessage(c.getPhoneNo(), null, message, null, null);
-                }
-                Toast.makeText(getApplicationContext(), "Message Sent successfully!",
-                        Toast.LENGTH_LONG).show();
+        // send SMS to each contact
+        for (ContactModel c : list) {
+            String message = "Hey, " + c.getName() + "I am now at a SAFE Location,Thanks for the lookout.";
+            sms.sendTextMessage(c.getPhoneNo(), null, message, null, null);
+        }
+        Toast.makeText(getApplicationContext(), "Message Sent successfully!",
+                Toast.LENGTH_LONG).show();
 
     }
 
@@ -345,9 +392,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-      //   get the list of all the contacts in Database
-            DbHelper db = new DbHelper(MainActivity.this);
-            List<ContactModel> list = db.getAllContacts();
+        //   get the list of all the contacts in Database
+        DbHelper db = new DbHelper(MainActivity.this);
+        List<ContactModel> list = db.getAllContacts();
 //            displaylocation();
 
         for (ContactModel c : list) {
@@ -358,7 +405,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-        }
+    }
 
 
 
@@ -523,7 +570,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
 //            PendingIntent pi=PendingIntent.getActivity(getApplicationContext(), 0, intent,0);
 //
-            // get the SMSManager
+        // get the SMSManager
 //            SmsManager sms = SmsManager.getDefault();
 
 //        Intent sendIntent = new Intent(Intent.ACTION_VIEW);

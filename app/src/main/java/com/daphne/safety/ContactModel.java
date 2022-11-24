@@ -23,7 +23,7 @@ public class ContactModel {
         if (phone.charAt(0) != '+') {
             for (int i = 0; i < phone.length(); i++) {
                 // remove any spaces or "-"
-                if (phone.charAt(i) != '-' && phone.charAt(i) != ' ') {
+                if (phone.charAt(i) != '0' && phone.charAt(i) != ' ') {
                     case1.append(phone.charAt(i));
                 }
             }

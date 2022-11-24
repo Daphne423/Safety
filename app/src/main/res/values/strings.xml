@@ -29,14 +29,15 @@
     \nThis is an important step towards achieving the <b>5 th</b> Sustainable Development Goal set by the United Nations on Gender Equality.
         \nGender Equality is all about equal rights and fair treatment.
         \nThis page basically explains how this app tries to solve that
-        \n<b>Emergency contact section:</b> it enables you to access your phone contacts and select a minimum of 2 and a maximum of 5 contacts
-        \n who will be notified in case of an emergency.You can change the contacts at any time
+        \n<b>Emergency contact section:</b> it enables you to access your phone contacts and select contacts a maximum of 5 contacts
+        \n who will be notified in case of an emergency.You can change the contacts at any time.
         \n<b>Location section:</b> it enables you to access locations of the nearest hospital and police station for help.
         \n I hope you will not be in a position to use them but this is for use when the situation gets out of hand.
         \n<b>Tips contact section:</b> it enables you to access important resources such as articles on what to do and how to respond when such a situation occurs.
         \nAbout contact section: it explains more about the application including the features it contains
-        \n<b>Emergency button section:</b> This is the button icon at the bottom of the dashboard.
-        \n Upon pressing you should receive a prompt on whether to cancel or continue.If you press continue,it will send a call for help message with your current location to your emergency contacts
+        \n<b>Emergency button section:</b> These are the 2 buttons <b>"Start" and "Stop"</b> at the bottom of the dashboard.
+        \n Upon pressing the start button you should see a pop-up where you select if you want to send an emergency message with your location.
+        \n on the other hand,the stop button sends a message to your emergency contacts that you are safe.
     </string>
     <string name="find">Find</string>
     <string name="search">Search</string>
@@ -45,6 +46,13 @@
     <string name="add_emergency_contact">Add Emergency Contact</string>
     <string name="send">Send</string>
     <string name="search_here">Search here</string>
+    <string name="bar_graph">Bar Graph</string>
+    <string name="reports">REPORTS</string>
+    <string name="graphs">Charts and Graph</string>
+    <string name="line">Line Graph</string>
+    <string name="chart">Pie Chart</string>
+    <string name="pie_chart">Pie Chart</string>
+    <string name="line_graph">Line Graph</string>
 
 </resources>
 
